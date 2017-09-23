@@ -16,7 +16,28 @@ public class SampleActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        
         mCompositeDisposable = new CompositeDisposable();
+        
+        // Below styles I used for many months and is bad
+        
+        // Style-1
+        // The code works but it's easy to make mistake
+        Disposable disposable = Observable.interval(1, TimeUnit.SECONDS)
+                                          .subscribe(v -> System.out.println("" + v));
+        mCompositeDisposable.add(disposable);
+        
+        
+        // Style-2
+        // The code works but it's ugly and confusing
+        mCompositeDisposable.add(
+                Observable.interval(1, TimeUnit.SECONDS)
+                          .subscribe(v -> System.out.println("" + v));
+        );
+        
+        
+        
+        // New styles with DisposableAttach, more simple
         Observable
             .interval(1, TimeUnit.SECONDS)
             .compose(DisposableAttach.to(mCompositeDisposable))
