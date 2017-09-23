@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>net.jjfive.rx2</groupId>
+    <groupId>net.jjfive.rx</groupId>
     <artifactId>disposable-attach-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
