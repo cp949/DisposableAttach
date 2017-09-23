@@ -1,5 +1,3 @@
-https://github.com/cp949/DisposableAttach
-
 RxJava Disposable Attach
 ======================
 
@@ -12,20 +10,20 @@ all new subscribers.
 
 ```java
 public class SampleActivity extends Activity {
-	// ...
-  	CompositeDisposable mCompositeDisposable;
-  	
+    // ...
+    CompositeDisposable mCompositeDisposable;
+    
     @Override
     protected void onResume() {
-    	super.onResume();
-    	mCompositeDisposable = new CompositeDisposable();
+        super.onResume();
+        mCompositeDisposable = new CompositeDisposable();
         Observable
-        	.interval(1, TimeUnit.SECONDS)
+            .interval(1, TimeUnit.SECONDS)
             .compose(DisposableAttach.to(mCompositeDisposable))
             .subscribe(v -> System.out.println("" + v));
             
-		Observable
-        	.create(someDataSource())
+        Observable
+            .create(someDataSource())
             .compose(DisposableAttach.to(mCompositeDisposable))
             .subscribe(v -> System.out.println("" + v));
     }
