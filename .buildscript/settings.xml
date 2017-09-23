@@ -1,0 +1,9 @@
+<settings>
+  <servers>
+    <server>
+      <id>ossrh</id>
+      <username>${env.SONA_USERID}</username>
+      <password>${env.SONA_PASSWD}</password>
+    </server>
+  </servers>
+</settings>
