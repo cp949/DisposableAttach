@@ -1,0 +1,65 @@
+apply plugin: 'java'
+
+ext {
+    bintrayRepo = 'DisposableAttach'
+    bintrayName = 'net.jjfive.rx:disposable-attach-library'
+    orgName = 'cp949'
+
+    publishedGroupId = 'net.jjfive.rx'
+    libraryName = 'DisposableAttach'
+    artifact = 'disposable-attach-library'
+
+    libraryDescription = 'Disposable Attach'
+
+    siteUrl = 'https://github.com/cp949/DisposableAttach'
+    gitUrl = 'https://github.com/cp949/DisposableAttach.git'
+
+    libraryVersion = '0.0.2'
+    developerId = 'cp949'
+    developerName = 'cp949'
+    developerEmail = 'softdada@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+}
+
+apply plugin: 'com.jfrog.bintray'
+group = publishedGroupId // Maven Group ID for the artifact
+version = libraryVersion
+
+// Bintray
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    //user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    //key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        userOrg = orgName
+        desc = libraryDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        publish = false
+        publicDownloadNumbers = true
+        version {
+            desc = libraryDescription
+        }
+    }
+}

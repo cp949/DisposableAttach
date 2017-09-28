@@ -1,0 +1,2 @@
+rootProject.name = 'DisposableAttach'
+include 'disposable-attach-library'

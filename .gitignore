@@ -22,5 +22,13 @@ release.properties
 *.iws
 *.ipr
 classes
+# IntelliJ
+/out/
 
 .DS_Store
+
+# gradle
+.gradle
+!gradle-wrapper.jar
+
+local.properties

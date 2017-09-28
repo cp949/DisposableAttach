@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+plugins {
+    id "com.jfrog.bintray" version "1.7"
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'maven'
+}
+
+
+subprojects {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.7'
+    }
+
+    // custom tasks for creating source/javadoc jars
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    // add javadoc/source jar tasks as artifacts
+    artifacts {
+        archives sourcesJar, javadocJar
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.2'
+}
