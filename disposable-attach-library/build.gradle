@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/cp949/DisposableAttach'
     gitUrl = 'https://github.com/cp949/DisposableAttach.git'
 
-    libraryVersion = '0.0.3'
+    libraryVersion = '0.0.4'
     developerId = 'cp949'
     developerName = 'cp949'
     developerEmail = 'softdada@gmail.com'
