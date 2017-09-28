@@ -1,7 +1,7 @@
 RxJava Disposable Attach
 ======================
 
-`DisposableAttach` is an RxJava 2 transformer which add disposable to CompositeDisposable operators.
+`DisposableAttach` is an RxJava 2 transformer which add disposable to CompositeDisposable.
 
 
 
