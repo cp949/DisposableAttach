@@ -3,7 +3,7 @@ RxJava Disposable Attach
 
 `DisposableAttach` is an RxJava 2 transformer which add disposable to CompositeDisposable operators.
 
-TODO.
+
 
 Apply with `compose` to an upstream `Observable` or `Flowable` or `Single` or `Maybe` `Completable` for
 all new subscribers.
@@ -56,6 +56,35 @@ public class SampleActivity extends Activity {
         mCompositeDisposable = null;
     }
 }
+```
+
+Limitation
+======================
+
+`.compose(DisposableAttach.to(xx))`  should be placed directly above `subscribe()`.
+
+Below code work properly.  `.compose(DisposableAttach.to(xx))` is directly above `.subscribe( ... )` 
+```java
+        // This is ok
+        Observable
+            .interval(1, TimeUnit.SECONDS)
+            .map( v -> v + 1)
+            .observeOn(Schedulers.io())
+            .compose(DisposableAttach.to(mCompositeDisposable))
+            .subscribe(v -> System.out.println("" + v));
+```
+
+But, below code is not work properly.  `.compose(DisposableAttach.to(xx))` is not directly above `.subscribe( ... )`
+```java
+        // This is not work properly
+        Observable
+            .interval(1, TimeUnit.SECONDS)
+            .map( v -> v + 1)
+            .compose(DisposableAttach.to(mCompositeDisposable))
+            .observeOn(Schedulers.io())            
+            .subscribe(v -> System.out.println("" + v));
+
+
 ```
 
 
